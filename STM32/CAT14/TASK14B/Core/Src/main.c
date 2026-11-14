@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file           : main.c
   * @brief          : CAT 14 - Subscribe example: control LD2 from any MQTT client / Node-RED
-  *                    Topic pranesh/stm32/led, messages ON / OFF / TOGGLE.
+  *                    Topic vaishali/stm32/led, messages ON / OFF / TOGGLE.
   ******************************************************************************
   * @attention
   *
@@ -38,9 +38,9 @@
 #define DBG_UART          (&huart6)          /* USART6 PC6/PC7 -> PuTTY 115200 */
 #define MQTT_BROKER       "broker.emqx.io"   /* public test broker            */
 #define MQTT_PORT         "1883"             /* plain (unencrypted) MQTT      */
-#define CMD_TOPIC         "pranesh/stm32/led"
+#define CMD_TOPIC         "vaishali/stm32/led"
 #define RETRY_MS          5000U              /* wait before reconnecting      */
-#define CLIENT_ID         "stm32-pranesh-sub"
+#define CLIENT_ID         "stm32-vaishali-sub"
 #define PING_PERIOD_MS    60000U             /* keep the connection alive */
 #define LED_PORT          GPIOA              /* LD2 on PA5, active-high   */
 #define LED_PIN           GPIO_PIN_5

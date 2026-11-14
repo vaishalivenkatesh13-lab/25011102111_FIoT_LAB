@@ -98,7 +98,7 @@ The objective of this laboratory course is to bridge the conceptual gap between 
 | **CAT 14** | [TASK 14A](STM32/CAT14/TASK14A/) | Cloud MQTT Telemetry Publisher | STM32F401RE + ESP8266 | `broker.emqx.io:1883`, publishes periodic `hello #n` frames |
 | **CAT 14** | [TASK 14B](STM32/CAT14/TASK14B/) | MQTT Remote Actuator Subscriber| STM32F401RE + ESP8266 | Subscribes to `.../stm32/led`, remote `ON`/`OFF` actuation |
 | **CAT 14** | [TASK 14C](STM32/CAT14/TASK14C/) | Full IoT Telemetry & Node-RED | STM32F401RE + BME280 + ESP | Publishes BME280 JSON to MQTT, live Node-RED dashboard |
-| **CAT 15** | [TASK 15](STM32/CAT15/) | Integrated Bidirectional Capstone | STM32F401RE + BME280 + ESP | Comprehensive Capstone: Telemetry, Actuation & Alerts |
+| **CAT 15** | [SMART IRRIGATION](STM32/CAT15/) | IoT-Based Smart Irrigation & Agriculture Monitoring | STM32F401RE + BME280 + ESP | Soil moisture, environmental telemetry, Node-RED dashboard & pump control |
 
 ---
 
@@ -158,7 +158,7 @@ The objective of this laboratory course is to bridge the conceptual gap between 
 │   │   ├── TASK14A/                   # Cloud MQTT Publisher via Course ESPLib
 │   │   ├── TASK14B/                   # Cloud MQTT Remote Actuator Subscriber
 │   │   └── TASK14C/                   # BME280 MQTT Telemetry to Node-RED Dashboard
-│   └── CAT15/                         # Full Capstone Bidirectional Edge IoT Node
+│   └── CAT15/                         # Smart Irrigation & Automated Agricultural Monitoring System
 │
 ├── .gitignore                         # Build Artifact & Simulation Exclusion Rules
 └── README.md                          # Master Repository Documentation

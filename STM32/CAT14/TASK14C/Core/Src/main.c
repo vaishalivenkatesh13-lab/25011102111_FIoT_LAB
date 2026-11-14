@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file           : main.c
   * @brief          : CAT 14 - BME280 over I2C published as JSON over MQTT (broker.emqx.io)
-  *                    Node-RED mqtt-in subscribes to pranesh/stm32/bme280 and visualises T/H/P.
+  *                    Node-RED mqtt-in subscribes to vaishali/stm32/bme280 and visualises T/H/P.
   ******************************************************************************
   * @attention
   *
@@ -40,9 +40,9 @@
 #define DBG_UART          (&huart6)          /* USART6 PC6/PC7 -> PuTTY 115200 */
 #define MQTT_BROKER       "broker.emqx.io"   /* public test broker            */
 #define MQTT_PORT         "1883"             /* plain (unencrypted) MQTT      */
-#define DATA_TOPIC        "pranesh/stm32/bme280"
+#define DATA_TOPIC        "vaishali/stm32/bme280"
 #define RETRY_MS          5000U              /* wait before reconnecting      */
-#define CLIENT_ID         "stm32-pranesh-bme280"
+#define CLIENT_ID         "stm32-vaishali-bme280"
 #define PUBLISH_PERIOD_MS 2000U
 /* BME280 on I2C1: PB6 = SCL, PB7 = SDA, 3.3 V, address 0x76 */
 /* USER CODE END PD */

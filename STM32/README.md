@@ -59,7 +59,7 @@ STM32/
 │   ├── TASK14A/      # Cloud MQTT Telemetry Publisher via Course ESPLib
 │   ├── TASK14B/      # Cloud MQTT Remote Actuation Subscriber (Topic Actuation)
 │   └── TASK14C/      # BME280 MQTT Telemetry Streaming to Node-RED Dashboard
-└── CAT15/            # Full Course Capstone: Bidirectional Cloud IoT Node
+└── CAT15/            # IoT-Based Smart Irrigation & Agricultural Monitoring System
 ```
 
 ---

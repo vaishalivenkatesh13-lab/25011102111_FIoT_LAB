@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file           : main.c
   * @brief          : CAT 14 - Steps 1-3 : MQTT CONNECT + PUBLISH through the ESP8266 (course ESPLib)
-  *                    Publishes "hello #n" to pranesh/stm32/test every second.
+  *                    Publishes "hello #n" to vaishali/stm32/test every second.
   ******************************************************************************
   * @attention
   *
@@ -38,9 +38,9 @@
 #define DBG_UART          (&huart6)          /* USART6 PC6/PC7 -> PuTTY 115200 */
 #define MQTT_BROKER       "broker.emqx.io"   /* public test broker            */
 #define MQTT_PORT         "1883"             /* plain (unencrypted) MQTT      */
-#define TEST_TOPIC        "pranesh/stm32/test"
+#define TEST_TOPIC        "vaishali/stm32/test"
 #define RETRY_MS          5000U              /* wait before reconnecting      */
-#define CLIENT_ID         "stm32-pranesh-test"
+#define CLIENT_ID         "stm32-vaishali-test"
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
