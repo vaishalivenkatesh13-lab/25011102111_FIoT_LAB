@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1540px;
+    height: 860px;
+    background-color: #fafbfd;
+    background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+    background-size: 20px 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+    color: #1e293b;
+  }
+
+  /* Top Banner */
+  .banner-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 14px;
+  }
+  .banner {
+    background: #f5f3ff;
+    border: 1.8px solid #a855f7;
+    border-radius: 12px;
+    padding: 8px 36px;
+    box-shadow: 0 2px 6px rgba(168, 85, 247, 0.12);
+  }
+  .banner h1 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #3b0764;
+    letter-spacing: 0.3px;
+  }
+
+  /* Power Supply Box */
+  .power-supply {
+    position: absolute;
+    left: 40px;
+    top: 95px;
+    width: 220px;
+    background: #fff1f2;
+    border: 1.6px solid #f43f5e;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 11px;
+    box-shadow: 0 2px 5px rgba(244, 63, 94, 0.08);
+  }
+  .power-supply .title {
+    font-weight: 800;
+    font-size: 13px;
+    color: #9f1239;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .power-supply .item {
+    color: #be123c;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  /* Power Rail Flags */
+  .rail-badge {
+    position: absolute;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    z-index: 20;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .badge-3v3 {
+    left: 640px;
+    top: 96px;
+    background: #fff1f2;
+    border: 1.5px solid #dc2626;
+    color: #b91c1c;
+  }
+  .badge-5v {
+    left: 1020px;
+    top: 96px;
+    background: #fff1f2;
+    border: 1.5px solid #dc2626;
+    color: #b91c1c;
+  }
+
+  /* Microcontroller Box */
+  .mcu-card {
+    position: absolute;
+    left: 540px;
+    top: 210px;
+    width: 280px;
+    height: 350px;
+    background: #f0f9ff;
+    border: 2px solid #0284c7;
+    border-radius: 20px;
+    padding: 18px 16px;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.1);
+    z-index: 10;
+  }
+  .mcu-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  .mcu-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 22px;
+    font-weight: 900;
+    color: #0369a1;
+  }
+  .mcu-sub {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0284c7;
+    margin-top: 2px;
+  }
+  .mcu-chip-graphic {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 6px 16px;
+    color: #f8fafc;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .mcu-pin-left {
+    position: absolute;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .mcu-pin-right {
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: right;
+  }
+  .mcu-pin {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .mcu-pin-left .mcu-pin { padding-left: 10px; }
+  .mcu-pin-right .mcu-pin { padding-right: 10px; justify-content: flex-end; }
+  .pin-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Peripheral Cards */
+  .card {
+    position: absolute;
+    border-radius: 16px;
+    padding: 12px 14px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    z-index: 10;
+  }
+  .card-header {
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .card-sub {
+    font-size: 9.5px;
+    font-weight: 600;
+    display: block;
+  }
+  .card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .card-pins {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 10.5px;
+    font-weight: 700;
+  }
+  .card-pins.right { text-align: right; }
+  .card-pins.left { text-align: left; }
+
+  /* Specific Cards */
+  .card-bme280 {
+    left: 160px;
+    top: 240px;
+    width: 250px;
+    background: #f0f9ff;
+    border: 1.6px solid #0284c7;
+  }
+  .card-bme280 .card-header { color: #0369a1; }
+
+  .card-soil {
+    left: 140px;
+    top: 405px;
+    width: 270px;
+    background: #f0fdf4;
+    border: 1.6px solid #16a34a;
+  }
+  .card-soil .card-header { color: #15803d; }
+
+  .card-esp {
+    left: 980px;
+    top: 225px;
+    width: 250px;
+    background: #fefce8;
+    border: 1.6px solid #eab308;
+  }
+  .card-esp .card-header { color: #854d0e; }
+
+  .card-relay {
+    left: 980px;
+    top: 405px;
+    width: 250px;
+    background: #faf5ff;
+    border: 1.6px solid #a855f7;
+  }
+  .card-relay .card-header { color: #581c87; }
+
+  .card-pump {
+    left: 1320px;
+    top: 410px;
+    width: 170px;
+    background: #fff1f2;
+    border: 1.6px solid #f43f5e;
+    text-align: center;
+  }
+  .card-pump .card-header { color: #9f1239; }
+
+  /* Bottom Panels */
+  .bottom-panels {
+    position: absolute;
+    left: 40px;
+    bottom: 25px;
+    right: 40px;
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    z-index: 10;
+  }
+
+  .table-card {
+    flex: 1.1;
+    background: #ffffff;
+    border: 1.4px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 10px 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .table-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: #1e1b4b;
+    margin-bottom: 6px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5px;
+  }
+  th {
+    background: #f1f5f9;
+    color: #334155;
+    text-align: left;
+    padding: 4px 6px;
+    font-weight: 700;
+    border-bottom: 1.5px solid #cbd5e1;
+  }
+  td {
+    padding: 4px 6px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
+    font-weight: 600;
+  }
+
+  .legend-card {
+    flex: 0.8;
+    background: #ffffff;
+    border: 1.4px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 10px 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .legend-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: #1e1b4b;
+    margin-bottom: 8px;
+  }
+  .legend-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 10.5px;
+    font-weight: 600;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .legend-line {
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+  }
+
+  .summary-card {
+    flex: 1.1;
+    background: #fbfbfe;
+    border: 1.6px dashed #a855f7;
+    border-radius: 12px;
+    padding: 10px 14px;
+    box-shadow: 0 2px 6px rgba(168, 85, 247, 0.04);
+  }
+  .summary-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: #4c1d95;
+    margin-bottom: 6px;
+  }
+  .summary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 10px;
+    line-height: 1.35;
+    color: #1e293b;
+    font-weight: 600;
+  }
+  .summary-item {
+    display: flex;
+    gap: 6px;
+  }
+  .summary-item span:first-child {
+    color: #7c3aed;
+    font-weight: 800;
+  }
+
+  /* SVG Wires Layer */
+  svg.wires {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top Banner -->
+  <div class="banner-container">
+    <div class="banner">
+      <h1>CAT15 : Smart Irrigation System – Circuit Diagram</h1>
+    </div>
+  </div>
+
+  <!-- Power Supply -->
+  <div class="power-supply">
+    <div class="title">Power Supply</div>
+    <div class="item">• 5 V DC (Relay, Pump)</div>
+    <div class="item">• 3.3 V DC (STM32, BME280, ESP8266)</div>
+  </div>
+
+  <!-- Rail Badges -->
+  <div class="rail-badge badge-3v3">3.3 V</div>
+  <div class="rail-badge badge-5v">5 V</div>
+
+  <!-- Microcontroller -->
+  <div class="mcu-card">
+    <div class="mcu-header">
+      <div class="mcu-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#0284c7"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        STM32
+      </div>
+      <div class="mcu-sub">(STM32F103C8T6)</div>
+    </div>
+
+    <!-- Pins Left -->
+    <div class="mcu-pin-left" style="top: 105px;">
+      <div class="mcu-pin"><span class="pin-dot" style="background:#2563eb;"></span>PB6 (I2C1_SCL)</div>
+      <div class="mcu-pin"><span class="pin-dot" style="background:#2563eb;"></span>PB7 (I2C1_SDA)</div>
+    </div>
+    <div class="mcu-pin-left" style="top: 200px;">
+      <div class="mcu-pin"><span class="pin-dot" style="background:#ea580c;"></span>PA0 (ADC1_IN0)</div>
+    </div>
+
+    <!-- Pins Right -->
+    <div class="mcu-pin-right" style="top: 115px;">
+      <div class="mcu-pin">PA9 (USART1_TX)<span class="pin-dot" style="background:#16a34a;"></span></div>
+      <div class="mcu-pin">PA10 (USART1_RX)<span class="pin-dot" style="background:#16a34a;"></span></div>
+    </div>
+    <div class="mcu-pin-right" style="top: 200px;">
+      <div class="mcu-pin">PB0 (GPIO_OUT)<span class="pin-dot" style="background:#9333ea;"></span></div>
+    </div>
+
+    <div class="mcu-chip-graphic">STM32F103C8T6</div>
+  </div>
+
+  <!-- BME280 Card -->
+  <div class="card card-bme280">
+    <div class="card-header">
+      BME280
+      <span class="card-sub">(Temperature, Humidity, Pressure)</span>
+    </div>
+    <div class="card-content">
+      <div style="width: 70px; height: 70px; background: #6b21a8; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 800;">
+        BME280
+      </div>
+      <div class="card-pins right">
+        <div>VCC</div>
+        <div>GND</div>
+        <div>SDA</div>
+        <div>SCL</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Soil Moisture Card -->
+  <div class="card card-soil">
+    <div class="card-header">
+      Soil Moisture Sensor
+      <span class="card-sub">(Analog Output)</span>
+    </div>
+    <div class="card-content">
+      <div style="width: 80px; height: 60px; background: #166534; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; font-weight: 800; text-align: center; padding: 4px;">
+        Moisture Probe
+      </div>
+      <div class="card-pins right">
+        <div>VCC</div>
+        <div>GND</div>
+        <div>AO</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESP8266 Card -->
+  <div class="card card-esp">
+    <div class="card-header">
+      ESP8266 (Wi-Fi Module)
+    </div>
+    <div class="card-content">
+      <div class="card-pins left">
+        <div>VCC</div>
+        <div>GND</div>
+        <div>TX</div>
+        <div>RX</div>
+      </div>
+      <div style="width: 80px; height: 70px; background: #0f172a; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #facc15; font-size: 11px; font-weight: 800;">
+        ESP8266
+      </div>
+    </div>
+  </div>
+
+  <!-- Relay Card -->
+  <div class="card card-relay">
+    <div class="card-header">
+      Relay Module (5 V)
+    </div>
+    <div class="card-content">
+      <div class="card-pins left">
+        <div>VCC</div>
+        <div>GND</div>
+        <div>IN</div>
+      </div>
+      <div style="width: 75px; height: 60px; background: #1d4ed8; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 800;">
+        RELAY 5V
+      </div>
+      <div class="card-pins right">
+        <div>NO</div>
+        <div>COM</div>
+        <div>NC</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Water Pump Card -->
+  <div class="card card-pump">
+    <div class="card-header">
+      Water Pump
+      <span class="card-sub">(DC)</span>
+    </div>
+    <div style="height: 55px; background: #334155; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: 800; margin-top: 4px;">
+      DC PUMP
+    </div>
+  </div>
+
+  <!-- SVG Wires Layer -->
+  <svg class="wires">
+    <!-- Top Power Rails -->
+    <!-- Red VCC rail -->
+    <path d="M 260 145 L 360 145 L 360 130 L 1260 130" fill="none" stroke="#dc2626" stroke-width="2.2" />
+    <circle cx="360" cy="130" r="3.5" fill="#dc2626" />
+
+    <!-- 3.3V drop to STM32 -->
+    <path d="M 680 130 L 680 210" fill="none" stroke="#dc2626" stroke-width="2.2" />
+    <circle cx="680" cy="130" r="3.5" fill="#dc2626" />
+
+    <!-- 5V drop to Relay and Pump -->
+    <circle cx="1060" cy="130" r="3.5" fill="#dc2626" />
+
+    <!-- Black GND rail -->
+    <path d="M 260 160 L 450 160 L 450 145 L 1250 145" fill="none" stroke="#0f172a" stroke-width="2.2" />
+    <circle cx="450" cy="145" r="3.5" fill="#0f172a" />
+
+    <!-- GND drop to STM32 -->
+    <path d="M 700 145 L 700 210" fill="none" stroke="#0f172a" stroke-width="2.2" />
+    <circle cx="700" cy="145" r="3.5" fill="#0f172a" />
+
+    <!-- VCC & GND to BME280 -->
+    <path d="M 360 145 L 360 285 L 410 285" fill="none" stroke="#dc2626" stroke-width="2" />
+    <circle cx="410" cy="285" r="3" fill="#dc2626" />
+    <path d="M 450 160 L 450 300 L 410 300" fill="none" stroke="#0f172a" stroke-width="2" />
+    <circle cx="410" cy="300" r="3" fill="#0f172a" />
+
+    <!-- VCC & GND to Soil Sensor -->
+    <path d="M 360 285 L 360 450 L 410 450" fill="none" stroke="#dc2626" stroke-width="2" />
+    <circle cx="410" cy="450" r="3" fill="#dc2626" />
+    <path d="M 450 300 L 450 465 L 410 465" fill="none" stroke="#0f172a" stroke-width="2" />
+    <circle cx="410" cy="465" r="3" fill="#0f172a" />
+
+    <!-- I2C from BME280 to STM32 -->
+    <!-- PB6 SCL -->
+    <path d="M 410 330 L 540 330" fill="none" stroke="#2563eb" stroke-width="2.2" />
+    <circle cx="410" cy="330" r="3.2" fill="#2563eb" />
+    <!-- PB7 SDA -->
+    <path d="M 410 315 L 540 315" fill="none" stroke="#2563eb" stroke-width="2.2" />
+    <circle cx="410" cy="315" r="3.2" fill="#2563eb" />
+
+    <!-- Analog Signal from Soil AO to STM32 PA0 -->
+    <path d="M 410 480 L 500 480 L 500 425 L 540 425" fill="none" stroke="#ea580c" stroke-width="2.2" />
+    <circle cx="410" cy="480" r="3.2" fill="#ea580c" />
+
+    <!-- ESP8266 Wires -->
+    <!-- VCC to ESP -->
+    <path d="M 950 130 L 950 270 L 980 270" fill="none" stroke="#dc2626" stroke-width="2" />
+    <circle cx="950" cy="130" r="3.5" fill="#dc2626" />
+    <circle cx="980" cy="270" r="3" fill="#dc2626" />
+    <!-- GND to ESP -->
+    <path d="M 970 145 L 970 285 L 980 285" fill="none" stroke="#0f172a" stroke-width="2" />
+    <circle cx="970" cy="145" r="3.5" fill="#0f172a" />
+    <circle cx="980" cy="285" r="3" fill="#0f172a" />
+
+    <!-- UART STM32 PA9 TX -> ESP8266 RX -->
+    <path d="M 820 340 L 980 340" fill="none" stroke="#16a34a" stroke-width="2.2" />
+    <circle cx="980" cy="340" r="3.2" fill="#16a34a" />
+
+    <!-- UART STM32 PA10 RX <- ESP8266 TX -->
+    <path d="M 820 355 L 980 355" fill="none" stroke="#16a34a" stroke-width="2.2" />
+    <circle cx="980" cy="355" r="3.2" fill="#16a34a" />
+
+    <!-- Relay Module Wires -->
+    <!-- VCC to Relay (5V) -->
+    <path d="M 950 270 L 950 450 L 980 450" fill="none" stroke="#dc2626" stroke-width="2" />
+    <circle cx="980" cy="450" r="3" fill="#dc2626" />
+    <!-- GND to Relay -->
+    <path d="M 970 285 L 970 465 L 980 465" fill="none" stroke="#0f172a" stroke-width="2" />
+    <circle cx="980" cy="465" r="3" fill="#0f172a" />
+
+    <!-- GPIO PB0 to Relay IN -->
+    <path d="M 820 425 L 980 425" fill="none" stroke="#9333ea" stroke-width="2.2" />
+    <circle cx="980" cy="425" r="3.2" fill="#9333ea" />
+
+    <!-- Relay COM to Pump -->
+    <path d="M 1230 465 L 1320 465" fill="none" stroke="#92400e" stroke-width="2.2" />
+    <circle cx="1230" cy="465" r="3.2" fill="#92400e" />
+
+    <!-- Pump Power Loop -->
+    <path d="M 1250 145 L 1250 480 L 1320 480" fill="none" stroke="#0f172a" stroke-width="2" />
+  </svg>
+
+  <!-- Bottom Panels -->
+  <div class="bottom-panels">
+    <!-- Pin Connections Table -->
+    <div class="table-card">
+      <div class="table-title">Pin Connections (STM32F103C8T6)</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Peripheral</th>
+            <th>STM32 Pin</th>
+            <th>Connection</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BME280 (I²C)</td>
+            <td>PB6<br>PB7</td>
+            <td>SCL<br>SDA</td>
+          </tr>
+          <tr>
+            <td>Soil Moisture (ADC)</td>
+            <td>PA0</td>
+            <td>Analog Output (AO)</td>
+          </tr>
+          <tr>
+            <td>ESP8266 (UART1)</td>
+            <td>PA9<br>PA10</td>
+            <td>TX (to RX of ESP8266)<br>RX (to TX of ESP8266)</td>
+          </tr>
+          <tr>
+            <td>Relay (Pump Control)</td>
+            <td>PB0</td>
+            <td>IN (Relay)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend-card">
+      <div class="legend-title">Legend</div>
+      <div class="legend-grid">
+        <div class="legend-item"><div class="legend-line" style="background:#dc2626;"></div>: VCC (3.3 V / 5 V)</div>
+        <div class="legend-item"><div class="legend-line" style="background:#0f172a;"></div>: GND</div>
+        <div class="legend-item"><div class="legend-line" style="background:#2563eb;"></div>: I²C Communication (SCL, SDA)</div>
+        <div class="legend-item"><div class="legend-line" style="background:#16a34a;"></div>: UART Communication (TX, RX)</div>
+        <div class="legend-item"><div class="legend-line" style="background:#ea580c;"></div>: Analog Signal (Soil Moisture)</div>
+        <div class="legend-item"><div class="legend-line" style="background:#9333ea;"></div>: Digital Control (Relay IN)</div>
+      </div>
+    </div>
+
+    <!-- Working Summary -->
+    <div class="summary-card">
+      <div class="summary-title">Working Summary</div>
+      <div class="summary-list">
+        <div class="summary-item"><span>✓</span><span>BME280 measures ambient temperature & humidity via I²C bus.</span></div>
+        <div class="summary-item"><span>✓</span><span>Soil moisture sensor reads volumetric soil moisture as analog voltage (ADC1_IN0).</span></div>
+        <div class="summary-item"><span>✓</span><span>STM32 processes sensor readings and uploads telemetry via ESP8266 using MQTT over Wi-Fi.</span></div>
+        <div class="summary-item"><span>✓</span><span>Relay actuates DC water pump automatically based on soil moisture threshold or manual Node-RED command.</span></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
